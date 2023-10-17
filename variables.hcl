@@ -8,7 +8,16 @@ variable "url" {
   description = "A URL for VirusTotal to scan"
 }
 
-variable "file" {
-  description = "Path to the local file"
-  type        = string
+variable "slack_token" {
+  type = string
+  description = "A URL for VirusTotal to scan"
+}
+
+variable "slack_channel" {
+  type = string
+  description = "A URL for VirusTotal to scan"
+}
+
+variable "file_path" {
+  type = string
 }

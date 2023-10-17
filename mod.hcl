@@ -11,4 +11,15 @@ mod "virustotal" {
     description = "Run pipelines and triggers that interact with VirusTotal."
     image       = "/images/flowpipe/mods/turbot/virustotal-social-graphic.png"
   }
+
+  require {
+
+    mod "github.com/turbot/flowpipe-mod-slack" {
+      version = "*"
+      args = {
+        token   = var.slack_token
+        channel = var.slack_channel
+      }
+    }
+  }
 }
