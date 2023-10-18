@@ -21,5 +21,13 @@ mod "virustotal" {
         channel = var.slack_channel
       }
     }
+
+    mod "github.com/turbot/flowpipe-mod-github" {
+      version = "*"
+      args = {
+        repository_full_name = var.github_repository_full_name
+        token                = var.github_token
+      }
+    }
   }
 }
