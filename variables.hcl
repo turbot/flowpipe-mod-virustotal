@@ -6,6 +6,7 @@ variable "api_key" {
 variable "url" {
   type = string
   description = "A URL for VirusTotal to scan"
+  default = ""
 }
 
 variable "slack_token" {
@@ -19,5 +20,13 @@ variable "slack_channel" {
 }
 
 variable "file_path" {
+  type = string
+}
+
+variable "github_repository_full_name"{
+  type = string
+}
+
+variable "github_token"{
   type = string
 }

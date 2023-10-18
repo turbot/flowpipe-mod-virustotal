@@ -11,28 +11,18 @@ pipeline "scan_url" {
   param "url" {
     type        = string
     description = "URL to scan"
-    default     = var.url
   }
 
   step "http" "scan_url" {
     title              = "Scan url"
     description        = "Submit a URL to VirusTotal for scanning."
-    # curl --request POST \
-    #  --url https://www.virustotal.com/api/v3/urls \
-    #  --form url=<Your URL here>
-    #  --header 'x-apikey: <your API key>'
-    url                = "https://www.virustotal.com/api/v3/urls?url=${urlencode("${param.url}")}"
-    method             = "post"
+    url                = "https://www.virustotal.com/vtapi/v2/url/report?apikey=${param.api_key}&resource=${urlencode(param.url)}"
+    method             = "GET"
     request_timeout_ms = 20000
-    request_headers    = {
-      x-apikey = "${var.api_key}"
-    }
   }
 
-  output "status_code" {
-    value = step.http.scan_url.status_code
+output "positives" {
+    value = step.http.scan_url.response_body.positives
   }
-  output "analysis_id" {
-    value = jsondecode(step.http.scan_url.response_body).data.id
-  }
+
 }
