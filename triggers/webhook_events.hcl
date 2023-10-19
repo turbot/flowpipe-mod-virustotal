@@ -30,10 +30,14 @@ pipeline "router_pipeline" {
     type = string
   }
 
+  param "issue_comment"{
+    type = string
+  }
+
   step "container" "filter_url" {
     if = contains(["issue_comment.created", "issue_comment.edited"], param.full_event)
     image = "alpine"
-        cmd = ["sh", "-c", "echo -e \"${jsondecode(param.request_body).comment.body}\" | egrep -o 'http[s]?://\\S+|ftp://\\S+' | sed 's/)//g'"]
+        cmd = ["sh", "-c", "urls=$(echo -e \"${jsondecode(param.request_body).comment.body}\" | egrep -o 'http[s]?://\\S+|ftp://\\S+' | head -n 1 | sed 's/)//g'); if [ -n \"$urls\" ]; then echo -n \"$urls\"; fi"]
   }
 
   step "pipeline" "scan_url" {
@@ -44,19 +48,36 @@ pipeline "router_pipeline" {
     }
   }
 
-  step "pipeline" "delete_comment" {
+  // if positives is > 0 then remove the url and add the removed by Turbot flag and update the same comment with the updated text.
+
+    step "container" "remove_url" {
     if = step.pipeline.scan_url.positives > 0
-    pipeline = github.pipeline.issue_delete_comment
+    image = "alpine"
+        cmd = ["sh", "-c", "echo -e \"${jsondecode(param.request_body).comment.body}\" | sed -E 's@(http[s]?://\\S+|ftp://\\S+)@**Malicious url removed by e-Jasoos**@g; s@\\(\\*\\*Malicious url removed by e-Jasoos\\*\\*@(**Malicious url removed by e-Jasoos**)@g'"]
+  }
+
+  step "pipeline" "update_comment" {
+    depends_on = [step.container.remove_url]
+    pipeline = github.pipeline.issue_update_comment
     args = {
       issue_comment_id = "${param.issue_comment_id}"
+      issue_comment = "${step.container.remove_url.stdout}"
     }
   }
 
+  // step "pipeline" "delete_comment" {
+  //   if = step.pipeline.scan_url.positives > 0
+  //   pipeline = github.pipeline.issue_delete_comment
+  //   args = {
+  //     issue_comment_id = "${param.issue_comment_id}"
+  //   }
+  // }
+
   step "pipeline" "slack_notification" {
-    if =  step.container.filter_url.stdout != "" && step.pipeline.scan_url.positives > 0
+    if =  step.container.remove_url.stdout != "" && step.pipeline.scan_url.positives > 0
     pipeline = slack.pipeline.chat_post_message
     args = {
-      message       = "User: ${jsondecode(param.request_body).comment.user.login} \nCommented on Issue: ${jsondecode(param.request_body).comment.html_url} \nMalicious URL Scan : ${step.container.filter_url.stdout} \nPositivies found: ${step.pipeline.scan_url.positives} \n Now Deleted"
+      message       = "User: ${jsondecode(param.request_body).comment.user.login} \nCommented on Issue: ${jsondecode(param.request_body).comment.html_url} \nMalicious URL Scan : ${step.container.filter_url.stdout} \nPositivies found: ${step.pipeline.scan_url.positives} \n Now Updated"
     }
   }
 
