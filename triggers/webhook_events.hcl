@@ -33,7 +33,7 @@ pipeline "router_pipeline" {
   step "container" "filter_url" {
     if = contains(["issue_comment.created", "issue_comment.edited"], param.full_event)
     image = "alpine"
-      cmd = ["sh", "-c", "echo -e \"${jsondecode(param.request_body).comment.body}\" | egrep -o 'http[s]?://\\S+|ftp://\\S+' | tr -d '\n'"]
+        cmd = ["sh", "-c", "echo -e \"${jsondecode(param.request_body).comment.body}\" | egrep -o 'http[s]?://\\S+|ftp://\\S+' | sed 's/)//g'"]
   }
 
   step "pipeline" "scan_url" {
@@ -43,8 +43,6 @@ pipeline "router_pipeline" {
       url = "${step.container.filter_url.stdout}"
     }
   }
-
-  // delete the comment if malicious link
 
   step "pipeline" "delete_comment" {
     if = step.pipeline.scan_url.positives > 0
