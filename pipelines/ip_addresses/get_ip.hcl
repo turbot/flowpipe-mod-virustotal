@@ -25,6 +25,6 @@ pipeline "get_ip" {
 
   output "ip_report" {
     description = "The result of submitting the URL for scanning."
-    value       = step.http.get_ip
+    value       = step.http.get_ip.response_body
   }
 }
