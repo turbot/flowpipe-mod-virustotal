@@ -1,6 +1,23 @@
-# VirusTotal Mod for Flowpipe
+---
+repository: "https://github.com/turbot/flowpipe-mod-virustotal"
+---
+
+# Flowpipe VirusTotal Mod
 
 Run pipelines and use triggers for VirusTotal resources.
+
+## References
+
+[VirusTotal](https://www.virustotal.com/) is an Internet security, file and URL analyzer.
+
+[Flowpipe](https://flowpipe.io) is an open source workflow tool.
+
+[Flowpipe Mods](https://flowpipe.io/docs/reference/mod-resources#mod) are collections of `pipelines` and `triggers`.
+
+## Documentation
+
+- **[Pipelines →](https://hub.flowpipe.io/mods/turbot/virustotal/pipelines)**
+- **[Triggers →](https://hub.flowpipe.io/mods/turbot/virustotal/triggers)**
 
 ## Getting started
 
@@ -46,7 +63,7 @@ Pipelines have [input variables](https://flowpipe.io/docs/using-flowpipe/mod-var
 - Pass in a value on the command line:
 
   ```shell
-  flowpipe pipeline run get_ip --pipeline-arg api_key="a1b2c3d4e5f6g7h8i9j10k11l12m13n14o15p16q17r18s19t20u21v22w23x24y"
+  flowpipe pipeline run post_message --pipeline-arg api_key="a1b2c3d4e5f6g7h8i9j10k11l12m13n14o15p16q17r18s19t20u21v22w23x24y"
   ```
 
 These are only some of the ways you can set variables. For a full list, please see [Passing Input Variables](https://flowpipe.io/docs/using-flowpipe/mod-variables#passing-input-variables).
