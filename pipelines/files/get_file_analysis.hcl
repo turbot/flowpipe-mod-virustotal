@@ -1,6 +1,6 @@
 pipeline "get_file_analysis" {
   title       = "Get File Analysis"
-  description = "Gets analysis information about a file from VirusTotal."
+  description = "Gets analysis about a file from VirusTotal."
 
   param "api_key" {
     type        = string
@@ -10,7 +10,7 @@ pipeline "get_file_analysis" {
 
   param "file_hash" {
     type        = string
-    description = "The hash of the file to get analysis information for."
+    description = "The hash of the file to get analysis for."
   }
 
   step "http" "get_file_analysis" {
@@ -23,8 +23,8 @@ pipeline "get_file_analysis" {
     }
   }
 
-  output "file_information" {
-    description = "Analysis information about the file."
+  output "file_analysis" {
+    description = "Analysis about the file."
     value       = step.http.get_file_analysis.response_body
   }
 }
