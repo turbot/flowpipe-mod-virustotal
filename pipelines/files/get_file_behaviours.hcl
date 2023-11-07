@@ -23,8 +23,8 @@ pipeline "get_file_behaviours" {
     }
   }
 
-  output "behaviour_summary" {
-    description = "The behaviour summary for the file."
+  output "behaviours" {
+    description = "The behaviours for the file."
     value       = step.http.get_file_behaviours.response_body
   }
 }
