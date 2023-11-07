@@ -5,7 +5,7 @@ pipeline "get_file_behaviour_summary" {
   param "api_key" {
     type        = string
     default     = var.api_key
-    description = "API key for authenticating requests with VirusTotal."
+    description = local.api_key_param_description
   }
 
   param "file_hash" {
