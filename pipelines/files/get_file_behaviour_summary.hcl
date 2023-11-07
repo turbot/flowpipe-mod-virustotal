@@ -10,7 +10,7 @@ pipeline "get_file_behaviour_summary" {
 
   param "file_hash" {
     type        = string
-    description = "The hash of the file to get the behaviour summary for."
+    description = local.file_hash_param_description
   }
 
   step "http" "get_file_behaviour_summary" {
