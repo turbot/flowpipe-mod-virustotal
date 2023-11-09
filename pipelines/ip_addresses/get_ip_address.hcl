@@ -1,6 +1,6 @@
-pipeline "get_ip" {
+pipeline "get_ip_address" {
   title       = "Get IP Address"
-  description = "Get information about an IP Address."
+  description = "Get information about an IP address."
 
   param "api_key" {
     type        = string
@@ -10,10 +10,10 @@ pipeline "get_ip" {
 
   param "ip_address" {
     type        = string
-    description = "The IP address that needs to be scanned."
+    description = "The IP address to be scanned."
   }
 
-  step "http" "get_ip" {
+  step "http" "get_ip_address" {
     method = "get"
     url    = "https://www.virustotal.com/api/v3/ip_addresses/${param.ip_address}"
 
@@ -24,7 +24,7 @@ pipeline "get_ip" {
   }
 
   output "ip_report" {
-    description = "The result of submitting the URL for scanning."
-    value       = step.http.get_ip.response_body
+    description = "The IP address report."
+    value       = step.http.get_ip_address.response_body
   }
 }
