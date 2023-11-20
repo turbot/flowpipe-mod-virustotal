@@ -31,7 +31,7 @@ flowpipe service start
 Run a pipeline:
 
 ```sh
-flowpipe pipeline run get_ip
+flowpipe pipeline run get_ip_address_report
 ```
 
 ### Credentials
@@ -46,7 +46,7 @@ Pipelines have [input variables](https://flowpipe.io/docs/using-flowpipe/mod-var
 - Pass in a value on the command line:
 
   ```shell
-  flowpipe pipeline run get_ip --pipeline-arg api_key="a1b2c3d4e5f6g7h8i9j10k11l12m13n14o15p16q17r18s19t20u21v22w23x24y"
+  flowpipe pipeline run get_ip_address_report --pipeline-arg api_key="a1b2c3d4e5f6g7h8i9j10k11l12m13n14o15p16q17r18s19t20u21v22w23x24y"
   ```
 
 These are only some of the ways you can set variables. For a full list, please see [Passing Input Variables](https://flowpipe.io/docs/using-flowpipe/mod-variables#passing-input-variables).
