@@ -1,5 +1,5 @@
 pipeline "get_ip_address_report" {
-  title       = "Get IP Address"
+  title       = "Get IP Address Report"
   description = "Get information about an IP address."
 
   param "api_key" {
