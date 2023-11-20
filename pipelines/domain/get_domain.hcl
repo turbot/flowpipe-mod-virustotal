@@ -1,4 +1,4 @@
-pipeline "get_domain" {
+pipeline "get_domain_report" {
   title       = "Get Domain Report"
   description = "Get information about a Domain."
 
@@ -6,7 +6,6 @@ pipeline "get_domain" {
     type        = string
     description = local.api_key_param_description
     default     = var.api_key
-
   }
 
   param "domain" {
@@ -14,7 +13,7 @@ pipeline "get_domain" {
     description = "The domain to be scanned."
   }
 
-  step "http" "get_domain" {
+  step "http" "get_domain_report" {
     method = "get"
     url    = "https://www.virustotal.com/api/v3/domains/${param.domain}"
 
@@ -26,6 +25,6 @@ pipeline "get_domain" {
 
   output "domain_report" {
     description = "The domain report."
-    value       = step.http.get_domain.response_body
+    value       = step.http.get_domain_report.response_body
   }
 }
