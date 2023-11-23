@@ -6,7 +6,6 @@ pipeline "get_url_analysis" {
     type        = string
     description = local.api_key_param_description
     default     = var.api_key
-
   }
 
   param "url" {
