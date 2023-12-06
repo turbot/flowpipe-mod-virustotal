@@ -2,10 +2,10 @@ pipeline "get_file_analysis" {
   title       = "Get File Analysis"
   description = "Gets analysis about a file from VirusTotal."
 
-  param "api_key" {
+  param "cred" {
     type        = string
-    default     = var.api_key
-    description = local.api_key_param_description
+    description = local.cred_param_description
+    default     = "default"
   }
 
   param "file_hash" {
@@ -18,7 +18,7 @@ pipeline "get_file_analysis" {
     url    = "https://www.virustotal.com/api/v3/files/${param.file_hash}"
 
     request_headers = {
-      x-apikey = param.api_key
+      x-apikey = credential.virustotal[param.cred].api_key
       Accept   = "application/json"
     }
   }

@@ -2,10 +2,10 @@ pipeline "get_url_analysis" {
   title       = "Get URL Analysis"
   description = "Get a URL analysis report."
 
-  param "api_key" {
+  param "cred" {
     type        = string
-    description = local.api_key_param_description
-    default     = var.api_key
+    description = local.cred_param_description
+    default     = "default"
   }
 
   param "url" {
@@ -18,7 +18,7 @@ pipeline "get_url_analysis" {
     url    = "https://www.virustotal.com/api/v3/urls/${base64encode(param.url)}"
 
     request_headers = {
-      x-apikey = param.api_key
+      x-apikey = credential.virustotal[param.cred].api_key
       Accept   = "application/json"
     }
   }

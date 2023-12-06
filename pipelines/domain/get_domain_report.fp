@@ -2,10 +2,10 @@ pipeline "get_domain_report" {
   title       = "Get Domain Report"
   description = "Get information about a Domain."
 
-  param "api_key" {
+  param "cred" {
     type        = string
-    description = local.api_key_param_description
-    default     = var.api_key
+    description = local.cred_param_description
+    default     = "default"
   }
 
   param "domain" {
@@ -18,7 +18,7 @@ pipeline "get_domain_report" {
     url    = "https://www.virustotal.com/api/v3/domains/${param.domain}"
 
     request_headers = {
-      x-apikey = param.api_key
+      x-apikey = credential.virustotal[param.cred].api_key
       Accept   = "application/json"
     }
   }
