@@ -2,6 +2,10 @@ pipeline "get_ip_address_report" {
   title       = "Get IP Address Report"
   description = "Get information about an IP address."
 
+  tags = {
+    type = "featured"
+  }
+  
   param "cred" {
     type        = string
     description = local.cred_param_description

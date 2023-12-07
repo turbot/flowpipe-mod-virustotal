@@ -2,6 +2,10 @@ pipeline "get_file_analysis" {
   title       = "Get File Analysis"
   description = "Gets analysis about a file from VirusTotal."
 
+  tags = {
+    type = "featured"
+  }
+  
   param "cred" {
     type        = string
     description = local.cred_param_description

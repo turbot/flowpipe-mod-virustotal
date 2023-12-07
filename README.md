@@ -36,13 +36,13 @@ flowpipe pipeline run get_ip_address_report
 
 ### Credentials
 
-This mod uses the credentials configured in `flowpipe.pvars` or passed through `--arg api_key`.
+This mod uses the credentials configured in `flowpipe.fpvars` or passed through `--arg api_key`.
 
 ### Configuration
 
-Pipelines have [input variables](https://flowpipe.io/docs/using-flowpipe/mod-variables) that can be configured to better match your environment and requirements. Some variables have defaults defined in its source file, e.g., `variables.hcl`, but these can be overwritten in several ways:
+Pipelines have [input variables](https://flowpipe.io/docs/using-flowpipe/mod-variables) that can be configured to better match your environment and requirements. Some variables have defaults defined in its source file, e.g., `variables.fp`, but these can be overwritten in several ways:
 
-- Copy and rename the `flowpipe.pvars.example` file to `flowpipe.pvars`, and then modify the variable values inside that file
+- Copy and rename the `flowpipe.fpvars.example` file to `flowpipe.fpvars`, and then modify the variable values inside that file
 - Pass in a value on the command line:
 
   ```shell

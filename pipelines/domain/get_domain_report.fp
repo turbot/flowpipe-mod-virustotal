@@ -2,6 +2,10 @@ pipeline "get_domain_report" {
   title       = "Get Domain Report"
   description = "Get information about a Domain."
 
+  tags = {
+    type = "featured"
+  }
+  
   param "cred" {
     type        = string
     description = local.cred_param_description
