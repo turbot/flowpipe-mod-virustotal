@@ -4,7 +4,7 @@ mod "virustotal" {
   color         = "#394eff"
   documentation = file("./docs/index.md")
   icon          = "/images/flowpipe/mods/turbot/virustotal.svg"
-  categories    = ["virustotal", "security"]
+  categories    = ["security"]
 
   opengraph {
     title       = "VirusTotal Mod for Flowpipe"
