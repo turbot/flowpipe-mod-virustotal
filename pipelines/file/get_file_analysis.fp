@@ -5,7 +5,7 @@ pipeline "get_file_analysis" {
   tags = {
     type = "featured"
   }
-  
+
   param "cred" {
     type        = string
     description = local.cred_param_description

@@ -13,7 +13,7 @@ pipeline "get_url_analysis" {
     description = "The url to be scanned."
   }
 
-  step "http" "url_analysis" {
+  step "http" "get_url_analysis" {
     method = "get"
     url    = "https://www.virustotal.com/api/v3/urls/${base64encode(param.url)}"
 
@@ -25,6 +25,6 @@ pipeline "get_url_analysis" {
 
   output "url_analysis" {
     description = "The URL analysis report."
-    value       = step.http.url_analysis.response_body
+    value       = step.http.get_url_analysis.response_body
   }
 }

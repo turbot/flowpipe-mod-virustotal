@@ -5,7 +5,7 @@ pipeline "get_domain_report" {
   tags = {
     type = "featured"
   }
-  
+
   param "cred" {
     type        = string
     description = local.cred_param_description
