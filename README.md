@@ -76,9 +76,9 @@ flowpipe pipeline run get_ip_address_report --arg cred=my_virustotal
 
 For more examples on how you can run pipelines, please see [Run Pipelines](https://flowpipe.io/docs/run/pipelines).
 
-### Credentials
+### Configuration
 
-This mod uses the credentials configured in `flowpipe.fpvars` or passed through `--arg api_key`.
+No additional configuration is required.
 
 ## Open Source & Contributing
 
