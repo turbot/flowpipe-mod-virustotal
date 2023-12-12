@@ -2,7 +2,7 @@ mod "virustotal" {
   title         = "VirusTotal"
   description   = "Run pipelines to supercharge your VirusTotal workflows using Flowpipe."
   color         = "#394eff"
-  documentation = file("./docs/index.md")
+  documentation = file("./README.md")
   icon          = "/images/mods/turbot/virustotal.svg"
   categories    = ["security"]
 

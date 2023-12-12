@@ -1,8 +1,16 @@
 # VirusTotal Mod for Flowpipe
 
-Run pipelines and use triggers for VirusTotal resources.
+VirusTotal pipeline library for [Flowpipe](https://flowpipe.io), enabling seamless integration of VirusTotal services into your workflows.
 
-## Getting started
+## Documentation
+
+- **[Pipelines →](https://hub.flowpipe.io/mods/turbot/virustotal/pipelines)**
+
+## Getting Started
+
+### Requirements
+
+Docker daemon must be installed and running. Please see [Install Docker Engine](https://docs.docker.com/engine/install/) for more information.
 
 ### Installation
 
@@ -20,12 +28,32 @@ git clone https://github.com/turbot/flowpipe-mod-virustotal.git
 cd flowpipe-mod-virustotal
 ```
 
-### Usage
+### Credentials
 
-Start your server to get started:
+By default, the following environment variables will be used for authentication:
+
+- `VTCLI_APIKEY`
+
+You can also create `credential` resources in configuration files:
 
 ```sh
-flowpipe service start
+vi ~/.flowpipe/config/virustotal.fpc
+```
+
+```hcl
+credential "virustotal" "my_virustotal" {
+  api_key = "AG.U7..."
+}
+```
+
+For more information on credentials in Flowpipe, please see [Managing Credentials](https://flowpipe.io/docs/run/credentials).
+
+### Usage
+
+List pipelines:
+
+```sh
+flowpipe pipeline list
 ```
 
 Run a pipeline:
@@ -34,30 +62,33 @@ Run a pipeline:
 flowpipe pipeline run get_ip_address_report
 ```
 
+You can pass in pipeline arguments as well:
+
+```sh
+flowpipe pipeline run get_ip_address_report --arg ip_address='76.76.21.21'
+```
+
+To use a specific `credential`, specify the `cred` pipeline argument:
+
+```sh
+flowpipe pipeline run get_ip_address_report --arg cred=my_virustotal
+```
+
+For more examples on how you can run pipelines, please see [Run Pipelines](https://flowpipe.io/docs/run/pipelines).
+
 ### Credentials
 
 This mod uses the credentials configured in `flowpipe.fpvars` or passed through `--arg api_key`.
 
-### Configuration
+## Open Source & Contributing
 
-Pipelines have [input variables](https://flowpipe.io/docs/using-flowpipe/mod-variables) that can be configured to better match your environment and requirements. Some variables have defaults defined in its source file, e.g., `variables.fp`, but these can be overwritten in several ways:
+This repository is published under the [Apache 2.0 license](https://www.apache.org/licenses/LICENSE-2.0). Please see our [code of conduct](https://github.com/turbot/.github/blob/main/CODE_OF_CONDUCT.md). We look forward to collaborating with you!
 
-- Copy and rename the `flowpipe.fpvars.example` file to `flowpipe.fpvars`, and then modify the variable values inside that file
-- Pass in a value on the command line:
+[Flowpipe](https://flowpipe.io) is a product produced from this open source software, exclusively by [Turbot HQ, Inc](https://turbot.com). It is distributed under our commercial terms. Others are allowed to make their own distribution of the software, but cannot use any of the Turbot trademarks, cloud services, etc. You can learn more in our [Open Source FAQ](https://turbot.com/open-source).
 
-  ```shell
-  flowpipe pipeline run get_ip_address_report --arg api_key="a1b2c3d4e5f6g7h8i9j10k11l12m13n14o15p16q17r18s19t20u21v22w23x24y"
-  ```
+## Get Involved
 
-These are only some of the ways you can set variables. For a full list, please see [Passing Input Variables](https://flowpipe.io/docs/using-flowpipe/mod-variables#passing-input-variables).
-
-## Contributing
-
-If you have an idea for additional controls or just want to help maintain and extend this mod ([or others](https://github.com/topics/flowpipe-mod)) we would love you to join the community and start contributing.
-
-- **[Join our Slack community →](https://flowpipe.io/community/join)** and hang out with other Mod developers.
-
-Please see the [contribution guidelines](https://github.com/turbot/flowpipe/blob/main/CONTRIBUTING.md) and our [code of conduct](https://github.com/turbot/flowpipe/blob/main/CODE_OF_CONDUCT.md). All contributions are subject to the [Apache 2.0 open source license](https://github.com/turbot/flowpipe-mod-virustotal/blob/main/LICENSE).
+**[Join #flowpipe on Slack →](https://flowpipe.io/community/join)**
 
 Want to help but not sure where to start? Pick up one of the `help wanted` issues:
 
