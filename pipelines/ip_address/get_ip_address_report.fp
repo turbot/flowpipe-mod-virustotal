@@ -2,10 +2,14 @@ pipeline "get_ip_address_report" {
   title       = "Get IP Address Report"
   description = "Get information about an IP address."
 
-  param "api_key" {
+  tags = {
+    type = "featured"
+  }
+
+  param "cred" {
     type        = string
-    default     = var.api_key
-    description = local.api_key_param_description
+    description = local.cred_param_description
+    default     = "default"
   }
 
   param "ip_address" {
@@ -18,7 +22,7 @@ pipeline "get_ip_address_report" {
     url    = "https://www.virustotal.com/api/v3/ip_addresses/${param.ip_address}"
 
     request_headers = {
-      x-apikey = param.api_key
+      x-apikey = credential.virustotal[param.cred].api_key
       Accept   = "application/json"
     }
   }
