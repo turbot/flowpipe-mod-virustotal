@@ -3,13 +3,13 @@ pipeline "get_ip_address_report" {
   description = "Get information about an IP address."
 
   tags = {
-    type = "featured"
+    recommended = "true"
   }
 
-  param "cred" {
-    type        = string
-    description = local.cred_param_description
-    default     = "default"
+  param "conn" {
+    type        = connection.virus_total
+    description = local.conn_param_description
+    default     = connection.virus_total.default
   }
 
   param "ip_address" {
@@ -22,7 +22,7 @@ pipeline "get_ip_address_report" {
     url    = "https://www.virustotal.com/api/v3/ip_addresses/${param.ip_address}"
 
     request_headers = {
-      x-apikey = credential.virustotal[param.cred].api_key
+      x-apikey = param.conn.api_key
       Accept   = "application/json"
     }
   }

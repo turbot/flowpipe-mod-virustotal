@@ -3,13 +3,13 @@ pipeline "get_file_analysis" {
   description = "Gets analysis about a file from VirusTotal."
 
   tags = {
-    type = "featured"
+    recommended = "true"
   }
 
-  param "cred" {
-    type        = string
-    description = local.cred_param_description
-    default     = "default"
+  param "conn" {
+    type        = connection.virus_total
+    description = local.conn_param_description
+    default     = connection.virus_total.default
   }
 
   param "file_hash" {
@@ -22,7 +22,7 @@ pipeline "get_file_analysis" {
     url    = "https://www.virustotal.com/api/v3/files/${param.file_hash}"
 
     request_headers = {
-      x-apikey = credential.virustotal[param.cred].api_key
+      x-apikey = param.conn.api_key
       Accept   = "application/json"
     }
   }

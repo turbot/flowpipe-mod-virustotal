@@ -2,10 +2,10 @@ pipeline "get_file_collections" {
   title       = "Get File Collections"
   description = "Gets the collections for a file from VirusTotal."
 
-  param "cred" {
-    type        = string
-    description = local.cred_param_description
-    default     = "default"
+  param "conn" {
+    type        = connection.virus_total
+    description = local.conn_param_description
+    default     = connection.virus_total.default
   }
 
   param "file_hash" {
@@ -18,7 +18,7 @@ pipeline "get_file_collections" {
     url    = "https://www.virustotal.com/api/v3/files/${param.file_hash}/collections"
 
     request_headers = {
-      x-apikey = credential.virustotal[param.cred].api_key
+      x-apikey = param.conn.api_key
       Accept   = "application/json"
     }
   }
