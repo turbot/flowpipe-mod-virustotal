@@ -4,11 +4,17 @@ mod "virustotal" {
   color         = "#394eff"
   documentation = file("./README.md")
   icon          = "/images/mods/turbot/virustotal.svg"
-  categories    = ["security"]
+  categories    = ["library", "security"]
 
   opengraph {
     title       = "VirusTotal Mod for Flowpipe"
     description = "Run pipelines to supercharge your VirusTotal workflows using Flowpipe."
     image       = "/images/mods/turbot/virustotal-social-graphic.png"
+  }
+
+  require {
+    flowpipe {
+      min_version = "1.0.0"
+    }
   }
 }
