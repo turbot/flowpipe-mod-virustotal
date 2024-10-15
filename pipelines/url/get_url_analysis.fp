@@ -3,9 +3,9 @@ pipeline "get_url_analysis" {
   description = "Get a URL analysis report."
 
   param "conn" {
-    type        = connection.virus_total
+    type        = connection.virustotal
     description = local.conn_param_description
-    default     = connection.virus_total.default
+    default     = connection.virustotal.default
   }
 
   param "url" {

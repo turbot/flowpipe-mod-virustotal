@@ -30,7 +30,7 @@ vi ~/.flowpipe/config/virustotal.fpc
 ```
 
 ```hcl
-connection "virus_total" "my_virustotal" {
+connection "virustotal" "my_virustotal" {
   api_key = "AG.U7..."
 }
 ```
@@ -101,7 +101,7 @@ flowpipe pipeline run get_ip_address_report --arg ip_address='76.76.21.21'
 To use a specific `connection`, specify the `conn` pipeline argument:
 
 ```sh
-flowpipe pipeline run get_ip_address_report --arg ip_address='76.76.21.21' --arg conn=connection.virus_total.my_virustotal
+flowpipe pipeline run get_ip_address_report --arg ip_address='76.76.21.21' --arg conn=connection.virustotal.my_virustotal
 ```
 
 ## Open Source & Contributing

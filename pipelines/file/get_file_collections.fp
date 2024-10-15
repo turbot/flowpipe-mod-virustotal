@@ -3,9 +3,9 @@ pipeline "get_file_collections" {
   description = "Gets the collections for a file from VirusTotal."
 
   param "conn" {
-    type        = connection.virus_total
+    type        = connection.virustotal
     description = local.conn_param_description
-    default     = connection.virus_total.default
+    default     = connection.virustotal.default
   }
 
   param "file_hash" {

@@ -7,9 +7,9 @@ pipeline "get_domain_report" {
   }
 
   param "conn" {
-    type        = connection.virus_total
+    type        = connection.virustotal
     description = local.conn_param_description
-    default     = connection.virus_total.default
+    default     = connection.virustotal.default
   }
 
   param "domain" {
