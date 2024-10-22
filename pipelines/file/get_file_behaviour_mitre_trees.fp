@@ -2,10 +2,10 @@ pipeline "get_file_behaviour_mitre_trees" {
   title       = "Get File Behaviour MITRE Trees"
   description = "Gets the behaviour MITRE trees for a file from VirusTotal."
 
-  param "cred" {
-    type        = string
-    description = local.cred_param_description
-    default     = "default"
+  param "conn" {
+    type        = connection.virustotal
+    description = local.conn_param_description
+    default     = connection.virustotal.default
   }
 
   param "file_hash" {
@@ -18,7 +18,7 @@ pipeline "get_file_behaviour_mitre_trees" {
     url    = "https://www.virustotal.com/api/v3/files/${param.file_hash}/behaviour_mitre_trees"
 
     request_headers = {
-      x-apikey = credential.virustotal[param.cred].api_key
+      x-apikey = param.conn.api_key
       Accept   = "application/json"
     }
   }

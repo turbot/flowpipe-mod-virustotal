@@ -2,10 +2,10 @@ pipeline "get_file_pe_resource_children" {
   title       = "Get File PE Resource Children"
   description = "Gets the PE resource children for a file."
 
-  param "cred" {
-    type        = string
-    description = local.cred_param_description
-    default     = "default"
+  param "conn" {
+    type        = connection.virustotal
+    description = local.conn_param_description
+    default     = connection.virustotal.default
   }
 
   param "file_hash" {
@@ -18,7 +18,7 @@ pipeline "get_file_pe_resource_children" {
     url    = "https://www.virustotal.com/api/v3/files/${param.file_hash}/pe_resource_children"
 
     request_headers = {
-      x-apikey = credential.virustotal[param.cred].api_key
+      x-apikey = param.conn.api_key
       Accept   = "application/json"
     }
   }

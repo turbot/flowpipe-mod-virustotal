@@ -2,10 +2,10 @@ pipeline "get_file_behaviours" {
   title       = "Get File Behaviours"
   description = "Gets all the behaviours for a file from VirusTotal."
 
-  param "cred" {
-    type        = string
-    description = local.cred_param_description
-    default     = "default"
+  param "conn" {
+    type        = connection.virustotal
+    description = local.conn_param_description
+    default     = connection.virustotal.default
   }
 
   param "file_hash" {
@@ -18,7 +18,7 @@ pipeline "get_file_behaviours" {
     url    = "https://www.virustotal.com/api/v3/files/${param.file_hash}/behaviours"
 
     request_headers = {
-      x-apikey = credential.virustotal[param.cred].api_key
+      x-apikey = param.conn.api_key
       Accept   = "application/json"
     }
   }
